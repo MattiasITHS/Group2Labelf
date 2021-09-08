@@ -57,9 +57,9 @@ Create a new API Credential
 
 Delete the API credential created
     sleep                 2
-    Click Element        xpath://*[@id="app"]/div[4]/div[1]/main/div/div/div[2]/div/div/div[1]/div[2]/div/div/div[11]/div/button/div
+    Click Element        xpath://*[@id="app"]/div[4]/div[1]/main/div/div/div[2]/div/div/div[1]/div[2]/div/div/div[12]/div/button/div
     sleep               1
-    Page Should not Contain Element   xpath://*[@id="app"]/div[4]/div[1]/main/div/div/div[2]/div/div/div[1]/div[2]/div/div/div[11]/div/button/div
+    Page Should not Contain Element   xpath://*[@id="app"]/div[4]/div[1]/main/div/div/div[2]/div/div/div[1]/div[2]/div/div/div[12]/div/button/div
 
 End Web Test
     Close Browser
