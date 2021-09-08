@@ -1,0 +1,406 @@
+{
+	"info": {
+		"_postman_id": "680b6cf7-09b2-4272-9a37-88ad10c17e72",
+		"name": "Labelf",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Obtain Bearer Token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", () => pm.expect(responseCode.code).to.equal(200));\r",
+							"\r",
+							"var jsonData = pm.response.json();\r",
+							"pm.environment.set(\"bearer_token\", jsonData.access_token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{clientsecret}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "{{clientid}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "client_credentials",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://auth.app.labelf.ai/oauth2/token",
+					"protocol": "https",
+					"host": [
+						"auth",
+						"app",
+						"labelf",
+						"ai"
+					],
+					"path": [
+						"oauth2",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Revoke Bearer Token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", () => pm.expect(responseCode.code).to.equal(200));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{clientsecret}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "{{clientid}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "token",
+							"value": "{{bearer_token}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://auth.app.labelf.ai/oauth2/revoke",
+					"protocol": "https",
+					"host": [
+						"auth",
+						"app",
+						"labelf",
+						"ai"
+					],
+					"path": [
+						"oauth2",
+						"revoke"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtain Bearer Token again",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", () => pm.expect(responseCode.code).to.equal(200));\r",
+							"var jsonData = pm.response.json();\r",
+							"pm.environment.set(\"bearer_token\", jsonData.access_token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{clientsecret}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "{{clientid}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "client_credentials",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://auth.app.labelf.ai/oauth2/token",
+					"protocol": "https",
+					"host": [
+						"auth",
+						"app",
+						"labelf",
+						"ai"
+					],
+					"path": [
+						"oauth2",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Call API",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", () => pm.expect(responseCode.code).to.equal(200));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{bearer_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"texts\":[\"my first inference\"]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.app.labelf.ai/v2/models/262/inference",
+					"protocol": "https",
+					"host": [
+						"api",
+						"app",
+						"labelf",
+						"ai"
+					],
+					"path": [
+						"v2",
+						"models",
+						"262",
+						"inference"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get id List",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", () => pm.expect(responseCode.code).to.equal(200));\r",
+							"\r",
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test('Number of models = ' + jsonData.length, function () {\r",
+							"    pm.expect(jsonData.length).to.equal(1);\r",
+							"\r",
+							"});\r",
+							"\r",
+							"pm.test('Number of labels = ' + jsonData[0].labels.length, function () {\r",
+							"    pm.expect(jsonData[0].labels.length).to.equal(11);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{bearer_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.app.labelf.ai/v2/models",
+					"protocol": "https",
+					"host": [
+						"api",
+						"app",
+						"labelf",
+						"ai"
+					],
+					"path": [
+						"v2",
+						"models"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Single id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", () => pm.expect(responseCode.code).to.equal(200));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{bearer_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.app.labelf.ai/v2/models/262",
+					"protocol": "https",
+					"host": [
+						"api",
+						"app",
+						"labelf",
+						"ai"
+					],
+					"path": [
+						"v2",
+						"models",
+						"262"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Inference on single model",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", () => pm.expect(responseCode.code).to.equal(200));\r",
+							"\r",
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Label should be REFUNDS\",() => pm.expect(pm.response.json()[0].predictions[0].label).to.eql(\"REFUNDS\"));\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{bearer_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"texts\":[\"when do I get my refund\"],\r\n    \"max_predictions\": 3\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.app.labelf.ai/v2/models/262/inference?model_id=262",
+					"protocol": "https",
+					"host": [
+						"api",
+						"app",
+						"labelf",
+						"ai"
+					],
+					"path": [
+						"v2",
+						"models",
+						"262",
+						"inference"
+					],
+					"query": [
+						{
+							"key": "model_id",
+							"value": "262"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
