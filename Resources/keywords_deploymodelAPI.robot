@@ -28,7 +28,7 @@ And user clicks on the deploy and on deploy model to API
    click element                      xpath://*[@id="app"]/div[4]/div[1]/main/div/div/div[2]/div/div/div[1]/div[2]/div/div/button[2]/div
 Then user should able to see the added current deployed API and can delete the same API
    wait until page contains           Model name: Api testing 30% validation-model
-   click element                      xpath: //*[@id="app"]/div[4]/div[1]/main/div/div/div[2]/div/div/div[1]/div[2]/div/div/div[11]/div/button/div
+   click element                      xpath://*[@id="app"]/div[4]/div[1]/main/div/div/div[2]/div/div/div[1]/div[2]/div/div/div[11]/div/button/div
    wait until page contains           How do i call the API?
 End Web Test
     Close Browser
