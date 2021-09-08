@@ -34,7 +34,7 @@ User adds a new Dataset
 User uploads a dataset
     click element               xpath://html/body/div[1]/div/div[3]/div/div/div[2]/div/div/div[1]/div/div[2]/button/div
     #click element               xpath://html/body/div[1]/div/div[3]/div/div/div[2]/div/div[2]/div/form/div[1]/div/div[2]/div/div/i
-    choose file                 //input[@id="fileUpload"]    C:\Users\hovde\Downloads/all_1500_rows.csv
+    choose file                 //input[@id="fileUpload"]    C:\all_1500_rows.csv
     click element               xpath://html/body/div[1]/div/div[3]/div/div/div[2]/div/div[2]/div/form/div[2]/button/div
     Page should contain         Setup
     click element               xpath://html/body/div[1]/div/div[3]/div/div/div[2]/div/div[4]/div/div/div[2]/button/div
